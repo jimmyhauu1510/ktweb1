@@ -1,0 +1,94 @@
+﻿@model List<DangKyHocPhan1.Models.ChiTietDangKy>
+
+@{
+    ViewBag.Title = "Đăng Ký Học Phần";
+    int totalCredit = 0;
+    int totalCourse = 0;
+}
+<h2>Học Phần</h2>
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Mã học phần
+                </th>
+                <th>
+                    Tên học phần
+                </th>
+                <th>
+                    Số tín chỉ
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                totalCredit += item.HocPhan.SoTinChi;
+                totalCourse++;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HocPhan.MaHP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HocPhan.TenHP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HocPhan.SoTinChi)
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-xoahocphan" data-madk="@item.MaDK" data-mahp="@item.HocPhan.MaHP">Xóa</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td>Số học phần: @totalCourse</td>
+                <td>Tổng số tín chỉ: @totalCredit</td>
+                <td>
+                    <button class="btn btn-danger btn-xoagiohang" data-madk="@Model.FirstOrDefault().MaDK">Xóa đăng ký</button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <p>
+        <a asp-action="DatHang">Xác nhận</a>
+    </p>
+}
+else
+{
+    <p>Chưa có học phần được đăng ký.</p>
+}
+@section scripts {
+    <script>
+         $(document).ready(function() {
+             $('.btn-xoahocphan').click(function () {
+                  var maDK = $(this).data('madk');
+                  var maHP = $(this).data('mahp');
+                  var url = '@Url.Action("XoaKhoiGioHang", "DangKy")';
+                 $.post(url, { maDK: maDK, maHP: maHP}).done(function (data) {
+                    alert(data);
+                     window.location.reload();
+                 }).fail(function(xhr,status,error)
+                {
+                    alert(xhr.responseText);
+                });
+             });
+            $('.btn-xoagiohang').click(function () {
+                 var maDK = $(this).data('madk');
+                 var url = '@Url.Action("XoaDangKy", "DangKy")';
+                 $.post(url, { maDK: maDK}).done(function (data) {
+                    alert(data);
+                    window.location.reload();
+                }).fail(function(xhr,status,error)
+                 {
+                   alert(xhr.responseText);
+                });
+             });
+        });
+    </script>
+}

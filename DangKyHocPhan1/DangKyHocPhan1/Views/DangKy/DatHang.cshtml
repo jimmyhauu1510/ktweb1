@@ -1,0 +1,87 @@
+﻿@model DangKyHocPhan1.Models.DangKy
+@{
+    ViewBag.Title = "Xác nhận đăng ký";
+    List<DangKyHocPhan1.Models.ChiTietDangKy> chiTietDangKys = ViewBag.ChiTietDangKys;
+    int totalCredit = 0;
+}
+<h2>Thông tin đăng ký</h2>
+<div>
+    <h4>Thông tin đăng ký</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã số sinh Viên:
+        </dt>
+        <dd>
+            @Model.MaSV
+        </dd>
+        <dt>
+            Họ Tên Sinh Viên:
+        </dt>
+        <dd>
+            @Model.SinhVien.HoTen
+        </dd>
+        <dt>
+            Ngày Sinh:
+        </dt>
+        <dd>
+            @Model.SinhVien.NgaySinh
+        </dd>
+        <dt>
+            Ngành Học:
+        </dt>
+        <dd>
+            @Model.SinhVien.NganhHoc.TenNganh
+        </dd>
+        <dt>
+            Ngày Đăng Kí:
+        </dt>
+        <dd>
+            @Model.NgayDK
+        </dd>
+    </dl>
+    <p>
+        <h4>Danh sách học phần</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Mã học phần
+                    </th>
+                    <th>
+                        Tên học phần
+                    </th>
+                    <th>
+                        Số tín chỉ
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in chiTietDangKys)
+                {
+                    totalCredit += item.HocPhan.SoTinChi;
+                    <tr>
+                        <td>
+                            @item.HocPhan.MaHP
+                        </td>
+                        <td>
+                            @item.HocPhan.TenHP
+                        </td>
+                        <td>
+                            @item.HocPhan.SoTinChi
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td>Số lượng học phần: @chiTietDangKys.Count</td>
+                    <td>Tổng số tín chỉ: @totalCredit</td>
+                </tr>
+            </tfoot>
+        </table>
+    </p>
+    <a asp-action="XacnhanDonHang">Xác nhận</a>
+    <a asp-action="GioHang">Trở về giỏ hàng</a>
+</div>

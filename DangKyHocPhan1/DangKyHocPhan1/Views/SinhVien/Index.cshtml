@@ -1,0 +1,73 @@
+﻿@model List<DangKyHocPhan1.Models.SinhVien>
+
+@{
+    ViewBag.Title = "Trang Sinh Viên";
+}
+
+<h2>TRANG SINH VIÊN</h2>
+
+<p>
+    <a asp-action="Create">Add Student</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Mã SV
+            </th>
+            <th>
+                Họ Tên
+            </th>
+            <th>
+                Giới Tính
+            </th>
+            <th>
+                Ngày Sinh
+            </th>
+            <th>
+                Hình
+            </th>
+            <th>
+                Ngành Học
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Hinh))
+                    {
+                        <img src="@item.Hinh" alt="Student Image" style="max-width: 50px; max-height: 50px;" />
+                    }
+                    else
+                    {
+                        <span>Không có hình</span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NganhHoc.TenNganh)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaSV">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MaSV">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MaSV">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

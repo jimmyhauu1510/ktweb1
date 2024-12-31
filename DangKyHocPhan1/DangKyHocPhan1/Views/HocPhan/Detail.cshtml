@@ -1,0 +1,39 @@
+﻿@model DangKyHocPhan1.Models.HocPhan
+@{
+    ViewBag.Title = "Chi tiết học phần";
+}
+<h2>Chi tiết học phần</h2>
+<div>
+    <h4>Học phần</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã học phần
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaHP)
+        </dd>
+        <dt>
+            Tên học phần
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenHP)
+        </dd>
+        <dt>
+            Số tín chỉ
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoTinChi)
+        </dd>
+        <dt>
+            Số lượng
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.MaHP">Sửa</a> |
+    <a asp-action="Index">Trở lại danh sách</a>
+</p>

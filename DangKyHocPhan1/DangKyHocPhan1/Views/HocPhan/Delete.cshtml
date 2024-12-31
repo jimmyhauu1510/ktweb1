@@ -1,0 +1,44 @@
+﻿@model DangKyHocPhan1.Models.HocPhan
+@{
+    ViewBag.Title = "Xóa học phần";
+}
+<h2>Xóa học phần</h2>
+<h3>Bạn có chắc chắn muốn xóa học phần này?</h3>
+<div>
+    <h4>Học phần</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã học phần
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaHP)
+        </dd>
+        <dt>
+            Tên học phần
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenHP)
+        </dd>
+        <dt>
+            Số tín chỉ
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoTinChi)
+        </dd>
+        <dt>
+            Số lượng
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            <a asp-action="Index">Trở lại danh sách</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,76 @@
+﻿@model DangKyHocPhan1.Models.SinhVien
+
+@{
+    ViewBag.Title = "Xóa sinh viên";
+}
+
+<h2>Xóa sinh viên</h2>
+
+<h3>Bạn có chắc chắn muốn xóa sinh viên này?</h3>
+<div>
+    <h4>Sinh viên</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã SV
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaSV)
+        </dd>
+
+        <dt>
+            Họ Tên
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+
+        <dt>
+            Giới Tính
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiTinh)
+        </dd>
+
+        <dt>
+            Ngày Sinh
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+        <dt>
+            Hình
+        </dt>
+
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.Hinh))
+            {
+                <img src="@Model.Hinh" alt="Student Image" style="max-width: 100px; max-height: 100px;" />
+            }
+            else
+            {
+                <span>Không có hình</span>
+            }
+        </dd>
+        <dt>
+            Ngành Học
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NganhHoc.TenNganh)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a asp-action="Index">Trở lại danh sách</a>
+        </div>
+    }
+</div>
